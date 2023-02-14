@@ -49,7 +49,7 @@ def el_gcs_to_bq(year: int, month: int, color: str) -> None:
 
 @flow(log_prints=True)
 def el_parent_gcs_to_bq(
-    months: list[int] = [1, 2], year: int = 2021, color: str = "yellow"
+    months: list = [1, 2], year: int = 2021, color: str = "yellow"
 ):
     """Main EL flow to load data into Big Query"""
     total_rows = 0

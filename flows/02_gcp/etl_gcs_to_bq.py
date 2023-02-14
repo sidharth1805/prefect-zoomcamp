@@ -12,6 +12,7 @@ def extract_from_gcs(color: str, year: int, month: int) -> Path:
     gcs_block = GcsBucket.load("zoom-gcs")
     gcs_block.get_directory(from_path=gcs_path, local_path=f"../data/")
     return Path(f"../data/{gcs_path}")
+    
 
 
 @task()
@@ -31,8 +32,8 @@ def write_bq(df: pd.DataFrame) -> None:
     gcp_credentials_block = GcpCredentials.load("zoom-gcp-creds")
 
     df.to_gbq(
-        destination_table="dezoomcamp.rides",
-        project_id="prefect-sbx-community-eng",
+        destination_table="dezoomcamp.yellow_rides",
+        project_id="dtc-de-course-376811",
         credentials=gcp_credentials_block.get_credentials_from_service_account(),
         chunksize=500_000,
         if_exists="append",
